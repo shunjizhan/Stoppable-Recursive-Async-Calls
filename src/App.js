@@ -31,9 +31,9 @@ const App = ({ timespan, updateTimespan }) => {
 
     async function fetchData(timespan) {
       let { data, nextPage } = await paginatedFetch(timespan, 0);
-      while (!stopped && nextPage) {
+      while (!stopped) {
         updateClient(data);
-        ({ data, nextPage } = await paginatedFetch(timespan, nextPage));
+        nextPage && ({ data, nextPage } = await paginatedFetch(timespan, nextPage));
       }
     }
 
